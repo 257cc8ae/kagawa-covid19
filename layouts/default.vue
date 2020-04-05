@@ -58,6 +58,9 @@ export default Vue.extend({
     if (this.$route.query.embed === 'true') {
       hasNavigation = false
       loading = false
+    } else if (this.$route.query.ogp === 'true') {
+      hasNavigation = false
+      loading = false
     }
 
     return {
@@ -78,13 +81,25 @@ export default Vue.extend({
     }
   },
   head(): MetaInfo {
-    const { htmlAttrs } = this.$nuxtI18nSeo()
+    const { htmlAttrs, meta } = this.$nuxtI18nSeo()
+    const ogLocale =
+      meta && meta.length > 0
+        ? meta[0]
+        : {
+            hid: 'og:locale',
+            name: 'og:locale',
+            content: this.$i18n.locale
+          }
     return {
       htmlAttrs,
       link: [
         {
           rel: 'canonical',
           href: `https://covid19-kagawa.netlify.com${this.$route.path}`
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css'
         }
       ],
       meta: [
@@ -97,7 +112,7 @@ export default Vue.extend({
           hid: 'description',
           name: 'description',
           content: this.$tc(
-            '当サイトは新型コロナウイルス感染症（COVID-19）に関する最新情報を提供するために、学生エンジニアが非公式に開設したものです。'
+            '当サイトは新型コロナウイルス感染症（COVID-19）に関する最新情報を提供するために、香川県の学生エンジニアがボランティアで開設したものです。'
           )
         },
         {
@@ -108,18 +123,14 @@ export default Vue.extend({
             ' ' +
             this.$t('新型コロナウイルス感染症') +
             ' ' +
-            this.$t('対策サイト(非公式)')
+            this.$t('非公式対策サイト')
         },
         {
           hid: 'og:url',
           property: 'og:url',
           content: `https://covid19-kagawa.netlify.com${this.$route.path}`
         },
-        {
-          hid: 'og:locale',
-          property: 'og:locale',
-          content: this.$i18n.locale
-        },
+        ogLocale,
         {
           hid: 'og:title',
           property: 'og:title',
@@ -128,13 +139,13 @@ export default Vue.extend({
             ' ' +
             this.$t('新型コロナウイルス感染症') +
             ' ' +
-            this.$t('対策サイト(非公式)')
+            this.$t('非公式対策サイト')
         },
         {
           hid: 'og:description',
           property: 'og:description',
           content: this.$tc(
-            '当サイトは新型コロナウイルス感染症 (COVID-19) に関する最新情報を提供するために、香川県のエンジニアがボランティアで開設したものです。'
+            '当サイトは新型コロナウイルス感染症 (COVID-19) に関する最新情報を提供するために、香川県の学生エンジニアがボランティアで開設したものです。'
           )
         },
         {
@@ -150,7 +161,7 @@ export default Vue.extend({
             ' ' +
             this.$t('新型コロナウイルス感染症') +
             ' ' +
-            this.$t('対策サイト(非公式)')
+            this.$t('非公式対策サイト')
         },
         {
           hid: 'twitter:image',
@@ -168,26 +179,36 @@ export default Vue.extend({
   margin: 0 auto;
   background-color: inherit !important;
 }
+
 .embed {
   .container {
     padding: 0 !important;
   }
+
   .DataCard {
     padding: 0 !important;
   }
 }
+
 .appContainer {
   position: relative;
+
   @include largerThan($small) {
     display: grid;
     grid-template-columns: 240px 1fr;
     grid-template-rows: auto;
   }
+
   @include largerThan($huge) {
     grid-template-columns: 325px 1fr;
     grid-template-rows: auto;
   }
 }
+
+.naviContainer {
+  background-color: $white;
+}
+
 @include lessThan($small) {
   .naviContainer {
     position: sticky;
@@ -196,6 +217,7 @@ export default Vue.extend({
     z-index: z-index-of(sp-navigation);
   }
 }
+
 @include largerThan($small) {
   .naviContainer {
     grid-column: 1/2;
@@ -206,31 +228,37 @@ export default Vue.extend({
     height: 100%;
     border-right: 1px solid $gray-4;
     border-left: 1px solid $gray-4;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
     overscroll-behavior: contain;
   }
 }
+
 @include largerThan($huge) {
   .naviContainer {
     width: 325px;
   }
 }
+
 .open {
   height: 100vh;
+
   @include largerThan($small) {
     overflow-x: hidden;
     overflow-y: auto;
   }
 }
+
 .mainContainer {
   grid-column: 2/3;
   overflow: hidden;
+
   @include lessThan($small) {
     .container {
       padding-top: 16px;
     }
   }
 }
+
 .loader {
   height: 200px;
   width: 150px;
@@ -238,6 +266,7 @@ export default Vue.extend({
   top: 50%;
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
+
   img {
     display: block;
     margin: 0 auto 20px;

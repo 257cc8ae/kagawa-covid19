@@ -6,10 +6,13 @@
         .loader {
           display: none;
         }
+        .v-overlay {
+          display: none;
+        }
       </style>
       <div class="noscript-heading">
         <img src="/logo.svg" :alt="$t('香川県')" />
-        {{ $t('新型コロナウイルス感染症') }}<br />{{ $t('対策サイト') }}
+        {{ $t('新型コロナウイルス感染症') }}<br />{{ $t('非公式対策サイト') }}
       </div>
       <div class="noscript-body">
         {{ $t('当サイトではJavaScriptを使用しております。') }}<br />
@@ -38,19 +41,25 @@
   max-width: 440px;
   transform: translateY(-50%) translateX(-50%);
 }
+
 .noscript-heading {
   display: flex;
   justify-content: center;
   align-items: center;
+
   @include font-size(13);
+
   color: #898989;
+
   img {
     margin-right: 16px;
   }
 }
+
 .noscript-body {
   @include font-size(13);
   @include card-container();
+
   border-radius: 4px;
   margin-top: 16px;
   padding: 1em;

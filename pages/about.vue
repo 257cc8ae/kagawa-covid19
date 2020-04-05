@@ -1,8 +1,8 @@
 <template>
   <div class="About">
-    <h2 class="About-Heading">
+    <page-header class="mb-3">
       {{ $t('当サイトについて') }}
-    </h2>
+    </page-header>
     <StaticCard>
       {{
         $t(
@@ -25,6 +25,7 @@
       <a href="//twitter.com/Luscaca_" target="_blank">
         {{ $t('@Luscaca_') }}
       </a>
+      )
       <br />
       ・なんぞー (
       <a href="//twitter.com/nandehu0323" target="_blank">
@@ -32,15 +33,10 @@
       </a>
       )
       <br />
-      ・なんぞー (
-      <a href="//twitter.com/nandehu0323" target="_blank">
-        {{ $t('@nandehu0323') }}
-      </a>
-      )<br />
       <br />
       複製・改変が許されたオープンソースライセンスで公開されている、
       <a href="//stopcovid19.metro.tokyo.lg.jp/" target="_blank">
-        {{ $t('東京都公式新型コロナウイルス対策サイト') }}
+        {{ $t('東京都公式新型コロナウイルス公式対策サイト') }}
       </a>
       の
       <a href="//github.com/tokyo-metropolitan-gov/covid19" target="_blank">
@@ -48,7 +44,7 @@
       </a>
       と
       <a href="//covid19-okayama.netlify.com/" target="_blank">
-        {{ $t('岡山県新型コロナウイルス感染症対策サイト (非公式)') }}
+        {{ $t('岡山県新型コロナウイルス感染症非公式対策サイト (非公式)') }}
       </a>
       のソースコードを利用しています。
       <br />
@@ -60,15 +56,17 @@
       }}
     </StaticCard>
     <StaticCard>
-      <h2>{{ $t('ブラウザ環境について') }}</h2>
+      <h3>{{ $t('ブラウザ環境について') }}</h3>
       <p>
         {{ $t('当サイトは以下の環境でご覧いただくことを推奨いたします。') }}
       </p>
       <ul>
         <li>{{ $t('Microsoft Edge 最新版') }}</li>
         <li>{{ $t('Mozilla Firefox 最新版') }}</li>
-        <li>{{ $t('Google Chrome 最新版（Windows 10以上）') }}</li>
-        <li>{{ $t('Apple Safari (macOS) 最新版') }}</li>
+        <li>
+          {{ $t('Google Chrome 最新版（Windows 10以上, Android 8.0以上）') }}
+        </li>
+        <li>{{ $t('Safari 最新版（macOS, iOS）') }}</li>
         <li>{{ $t('Opera Software ASA Opera 最新版') }}</li>
       </ul>
       <p class="StaticCard-Note">
@@ -83,11 +81,11 @@
       </p>
     </StaticCard>
     <StaticCard>
-      <h2>{{ $t('当サイトへのリンクについて') }}</h2>
+      <h3>{{ $t('当サイトへのリンクについて') }}</h3>
       <p>{{ $t('当サイトへのリンクは自由です。') }}</p>
     </StaticCard>
     <StaticCard>
-      <h2>{{ $t('JavaScriptについて') }}</h2>
+      <h3>{{ $t('JavaScriptについて') }}</h3>
       <p>
         {{ $t('当サイトではJavaScriptを使用しております。') }}<br />
         {{
@@ -103,7 +101,7 @@
       </p>
     </StaticCard>
     <StaticCard>
-      <h2>{{ $t('クッキー (Cookie) について') }}</h2>
+      <h3>{{ $t('クッキー (Cookie) について') }}</h3>
       <p>
         {{ $t('当サイトの一部ではクッキーを使用しています。') }}<br />
         {{
@@ -188,11 +186,11 @@
       </ul>
     </StaticCard>
     <StaticCard>
-      <h2>{{ $t('免責事項') }}</h2>
+      <h3>{{ $t('免責事項') }}</h3>
       <p>
         {{
           $t(
-            '当サイトに掲載されている情報の正確性については万全を期していますが、運営者は利用者が当サイトの情報を用いて行う一切の行為について責任を負うものではありません。'
+            '当サイトに掲載されている情報の正確性については万全を期していますが、香川県は利用者が当サイトの情報を用いて行う一切の行為について責任を負うものではありません。'
           )
         }}
       </p>
@@ -212,32 +210,41 @@
       </p>
     </StaticCard>
     <StaticCard>
-      <h2>{{ $t('データについて') }}</h2>
+      <h3>{{ $t('データについて') }}</h3>
       <i18n
         tag="p"
         path="本サイトで公表しているデータは、{catalogWebsite}より誰でも自由にダウンロードが可能です。"
       >
-        <a
-          href="https://www.pref.kagawa.lg.jp/content/dir1/dir1_6/dir1_6_2/wt5q49200131182439.shtml"
-          target="_blank"
-          rel="noopener"
-          place="catalogWebsite"
-        >
-          {{ $t('新型コロナウイルス感染症（COVID－19）に関する情報') }}
-        </a>
+        <template v-slot:catalogWebsite>
+          <a
+            href="https://www.pref.kagawa.lg.jp/content/etc/subsite/kansenshoujouhou/kansen/sr5cfn200127213457.shtml"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ $t('香川県感染症情報サイト') }}
+          </a>
+        </template>
       </i18n>
     </StaticCard>
     <StaticCard>
-      <h2>{{ $t('お問い合わせ先') }}</h2>
+      <h3>{{ $t('ソースコードについて') }}</h3>
       <p>
-        {{ $t('香川県 新型コロナウイルス感染症 対策サイト 運営者代表') }}<br />
-        {{ $t('メール') }}:
-        <a href="mail:lusaca.contact@gmail.com">lusaca.contact@gmail.com</a>。
-        または、代表のツイッター
-        <a href="//twitter.com/Luscaca_" target="_blank">
-          {{ $t('@Luscaca_') }}
-        </a>
-        にDMでお願いします。
+        {{
+          $t(
+            '当サイトのソースコードはMITライセンスで公開されており、誰でも自由に利用することができます。'
+          )
+        }}
+        <i18n path="詳しくは、{githubRepo}をご確認ください。">
+          <template v-slot:githubRepo>
+            <a
+              href="https://github.com/codeforkagawa/covid19"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ $t('GitHub リポジトリ') }}
+            </a>
+          </template>
+        </i18n>
       </p>
     </StaticCard>
   </div>
@@ -246,25 +253,18 @@
 <script lang="ts">
 import Vue from 'vue'
 import { MetaInfo } from 'vue-meta'
+import PageHeader from '@/components/PageHeader.vue'
 import StaticCard from '@/components/StaticCard.vue'
 
 export default Vue.extend({
   components: {
+    PageHeader,
     StaticCard
   },
-  head: (): MetaInfo => ({
-    title: '当サイトについて'
-  })
+  head(): MetaInfo {
+    return {
+      title: this.$t('当サイトについて') as string
+    }
+  }
 })
 </script>
-
-<style lang="scss">
-.About {
-  &-Heading {
-    @include font-size(30);
-    font-weight: normal;
-    color: $gray-2;
-    margin-bottom: 12px;
-  }
-}
-</style>

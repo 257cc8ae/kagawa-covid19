@@ -1,8 +1,8 @@
 <template>
   <div class="Parent">
-    <h2 class="Parent-Heading">
+    <page-header class="mb-3">
       {{ $t('臨時休校中の新型コロナウイルス感染症対応についてのお願い') }}
-    </h2>
+    </page-header>
     <StaticCard>
       <h3>1. {{ $t('感染予防・健康管理') }}</h3>
       <ul>
@@ -19,7 +19,7 @@
           <a
             href="https://tokyodouga.jp/lViN9C_BS-0.html"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             >{{ $t('【参考】感染症予防のための正しい手洗い方法（動画）') }}</a
           >
         </li>
@@ -38,51 +38,93 @@
         <li>{{ $t('各保健所にご相談ください') }}</li>
         <li>
           {{ $t('「新型コロナウイルス感染症にかかる相談窓口について」') }}<br />
-          <table summary="相談窓口（帰国者・接触者相談センター）連絡先一覧">
-            <tbody>
+          <table class="Contacts-Card-Table" v-bind="tableAttrs">
+            <thead>
               <tr>
-                <th>
-                  <strong>相談窓口</strong>
+                <th class="text-center" scope="col">
+                  {{ $t('相談窓口') }}
                 </th>
-                <th>
-                  <strong>電話番号</strong>
+                <th class="text-center" scope="col">
+                  {{ $t('電話番号') }}
                 </th>
-                <th>
-                  <strong>FAX（土日祝除く）</strong>
+                <th class="text-center" scope="col">
+                  {{ $t('FAX（土日祝除く）') }}
                 </th>
-                <th>
-                  <strong>開設時間</strong>
+                <th class="text-center" scope="col">
+                  {{ $t('開設時間') }}
                 </th>
               </tr>
+            </thead>
+            <tbody style="text-align: center;">
               <tr>
-                <td>小豆保健所</td>
-                <td>0879－62－1373</td>
-                <td>0879－62－1384</td>
-                <td>8時30分～17時15分</td>
+                <td class="content">
+                  {{ $t('小豆保健所') }}
+                </td>
+                <td class="tel">
+                  <a href="tel:0879-62-1373">0879-62-1373</a>
+                </td>
+                <td class="tel">
+                  0879-62-1384
+                </td>
+                <td class="bureau">
+                  {{ $t('8時30分～17時15分') }}
+                </td>
               </tr>
               <tr>
-                <td>東讃保健所</td>
-                <td>0879－29－8261</td>
-                <td>0879－42－5881</td>
-                <td>8時30分～17時15分</td>
+                <td class="content">
+                  {{ $t('東讃保健所') }}
+                </td>
+                <td class="tel">
+                  <a href="tel:0879-29-8261">0879-29-8261</a>
+                </td>
+                <td class="tel">
+                  0879-42-5881
+                </td>
+                <td class="bureau">
+                  {{ $t('8時30分～17時15分') }}
+                </td>
               </tr>
               <tr>
-                <td>中讃保健所</td>
-                <td>0877－24－9962</td>
-                <td>0877－24－8341</td>
-                <td>8時30分～17時15分</td>
+                <td class="content">
+                  {{ $t('中讃保健所') }}
+                </td>
+                <td class="tel">
+                  <a href="tel:0877-24-9962">0877-24-9962</a>
+                </td>
+                <td class="tel">
+                  0877-24-8341
+                </td>
+                <td class="bureau">
+                  {{ $t('8時30分～17時15分') }}
+                </td>
               </tr>
               <tr>
-                <td>西讃保健所</td>
-                <td>0875－25－2052</td>
-                <td>0875－25－6320</td>
-                <td>8時30分～17時15分</td>
+                <td class="content">
+                  {{ $t('西讃保健所') }}
+                </td>
+                <td class="tel">
+                  <a href="tel:0875-25-2052">0875-25-2052</a>
+                </td>
+                <td class="tel">
+                  0875-25-6320
+                </td>
+                <td class="bureau">
+                  {{ $t('8時30分～17時15分') }}
+                </td>
               </tr>
               <tr>
-                <td>高松市保健所</td>
-                <td>087－839－2870</td>
-                <td>087－839－2879</td>
-                <td>8時30分～17時15分</td>
+                <td class="content">
+                  {{ $t('高松市保健所') }}
+                </td>
+                <td class="tel">
+                  <a href="tel:087-839-2870">087-839-2870</a>
+                </td>
+                <td class="tel">
+                  087-839-2879
+                </td>
+                <td class="bureau">
+                  {{ $t('8時30分～17時15分') }}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -90,7 +132,7 @@
       </ul>
     </StaticCard>
     <StaticCard>
-      <h3>3. {{ $t('その他') }}</h3>
+      <h3>3. {{ $t('その他.parent') }}</h3>
       <p>{{ $t('詳細は、各学校からのお知らせ等をご確認ください。') }}</p>
     </StaticCard>
   </div>
@@ -100,41 +142,17 @@
 import Vue from 'vue'
 import { MetaInfo } from 'vue-meta'
 import StaticCard from '@/components/StaticCard.vue'
-
-type ItemData = {
-  items: Item[]
-}
-
-type Item = {
-  title: string
-  body: string
-}
+import PageHeader from '@/components/PageHeader.vue'
 
 export default Vue.extend({
   components: {
+    PageHeader,
     StaticCard
   },
-  head: (): MetaInfo => ({
-    title: 'お子様をお持ちの皆様へ'
-  })
+  head(): MetaInfo {
+    return {
+      title: this.$t('お子様をお持ちの皆様へ') as string
+    }
+  }
 })
 </script>
-
-<style lang="scss">
-.Parent {
-  &-Heading {
-    @include font-size(30);
-    font-weight: normal;
-    color: $gray-2;
-    margin-bottom: 12px;
-  }
-}
-
-th {
-  text-align: center;
-}
-
-td {
-  padding: 5px 15px;
-}
-</style>

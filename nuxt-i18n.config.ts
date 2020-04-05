@@ -17,13 +17,15 @@ export default {
       code: 'ja',
       name: '日本語',
       iso: 'ja-JP',
-      file: 'ja.json'
+      file: 'ja.json',
+      description: 'Japanese'
     },
     {
       code: 'en',
       name: 'English',
       iso: 'en-US',
-      file: 'en.json'
+      file: 'en.json',
+      description: 'English'
     },
     // {
     //   code: 'zh-cn',
@@ -49,13 +51,15 @@ export default {
     //   code: 'pt-BR',
     //   name: 'Portuguese',
     //   iso: 'pt-BR',
-    //   file: 'pt_BR.json'
+    //   file: 'pt_BR.json',
+    //   description: 'Portuguese'
     // },
     {
       code: 'ja-basic',
       name: 'やさしい にほんご',
       iso: 'ja-JP',
-      file: 'ja-Hira.json'
+      file: 'ja-Hira.json',
+      description: 'Easy Japanese'
     }
   ]
 }

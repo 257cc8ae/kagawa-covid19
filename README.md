@@ -1,16 +1,16 @@
-# 香川県(非公式) 新型コロナウイルス感染症対策サイト
+# 香川県 新型コロナウイルス感染症非公式対策サイト
 
-[![香川県 新型コロナウイルス感染症対策サイト](https://user-images.githubusercontent.com/19589940/76959982-f2868a80-695d-11ea-9d8e-28e9e9225d2c.png)](https://covid19-kagawa.netlify.com/)
+[![香川県 新型コロナウイルス感染症非公式対策サイト](https://user-images.githubusercontent.com/19589940/76959982-f2868a80-695d-11ea-9d8e-28e9e9225d2c.png)](https://covid19-kagawa.netlify.com/)
 
 ### 日本語 | [English](./README_EN.md)
 
 ## 貢献の仕方
 Issues にあるいろいろな修正にご協力いただけると嬉しいです。
 
-詳しくは[貢献の仕方](./.github/CONTRIBUTING.md)を御覧ください。
+詳しくは[貢献の仕方](./CONTRIBUTING.md)を御覧ください。
 
 ## 行動原則
-詳しくは[サイト構築にあたっての行動原則](./.github/CODE_OF_CONDUCT.md)を御覧ください。
+詳しくは[サイト構築にあたっての行動原則](./CODE_OF_CONDUCT.md)を御覧ください。
 
 ## ライセンス
 本ソフトウェアは、[MITライセンス](./LICENSE.txt)の元提供されています。
@@ -72,5 +72,3 @@ Pull Request を送る際の branch は、以下のネーミングルールで�
 | ---- | -------- | ---- | ---- |
 | 開発 | development | http://covid19-kagawa-dev.netlify.com/ | base branch。基本はこちらに Pull Requestを送ってください |
 | 本番 | master | https://covid19-kagawa.netlify.com/ | 管理者以外の Pull Request は禁止です |
-
-
